@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Light values; values-night holds the dark set, values-v27 the light navigation bar.
+         The system bars stay neutral because the in-app colour gradient can be changed. -->
+    <color name="app_bg">#E8ECEF</color>
+    <color name="status_bar">#F3F8FB</color>
+    <!-- below Android 8.1 the navigation-bar icons are always white, so the bar stays dark there -->
+    <color name="nav_bar">#0D1215</color>
+    <color name="azure">#1CADE3</color>
+    <color name="panel">#14262F</color>
+</resources>

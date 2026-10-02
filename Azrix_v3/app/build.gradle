@@ -1,0 +1,69 @@
+plugins { id "com.android.application" }
+
+android {
+    namespace "com.azrix.life"
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.azrix.life"
+        minSdk 24
+        targetSdk 34
+        versionCode 3
+        versionName "2.1"
+
+        // the text reader ships a native library per phone CPU; real phones are ARM
+        ndk { abiFilters "arm64-v8a", "armeabi-v7a" }
+    }
+
+    // One fixed key, kept in this private repo, so every future APK installs over the last one
+    // and your entries stay. Do not make the repository public while this file is in it.
+    signingConfigs {
+        azrix {
+            storeFile file("azrix-release.jks")
+            storePassword "azrix-life-2026"
+            keyAlias "azrix"
+            keyPassword "azrix-life-2026"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.azrix
+            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+        }
+        debug {
+            signingConfig signingConfigs.azrix
+        }
+    }
+
+    buildFeatures { buildConfig true }
+
+    lint {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    implementation "androidx.appcompat:appcompat:1.7.0"
+    implementation "androidx.webkit:webkit:1.11.0"
+
+    // reads the text in photos of receipts and statements — the model is inside the APK,
+    // so it works offline and nothing is sent anywhere
+    implementation "com.google.mlkit:text-recognition:16.0.1"
+
+    // appcompat and webkit pull in Kotlin stdlib 1.8.22 next to the older
+    // kotlin-stdlib-jdk7/jdk8 1.6.21 artifacts. Kotlin 1.8 folded those two into
+    // kotlin-stdlib itself, so the same classes arrive twice and the build fails
+    // on duplicates. Pinning them to 1.8.22 makes them empty shims.
+    constraints {
+        implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.22"
+        implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.22"
+    }
+}

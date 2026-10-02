@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- the Azrix mark, centred inside the 66dp safe zone of a 108dp adaptive icon -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <group android:translateX="29" android:translateY="34" android:scaleX="1.25" android:scaleY="1.25">
+        <path android:fillColor="#FFFFFF" android:pathData="M9,0H40L31,32H0Z" />
+        <path android:fillColor="#2483C5" android:pathData="M24.6,3.2 L11.4,18.3h6.3L15.4,28.8 L28.9,13.4h-6.4z" />
+    </group>
+</vector>
