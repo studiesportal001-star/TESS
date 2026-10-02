@@ -1,4 +1,4 @@
-name: Build Azrix_v2 APK
+name: Build Azrix APK
 
 on:
   push:
@@ -11,6 +11,9 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Azrix_v3
     steps:
       - uses: actions/checkout@v4
 
@@ -38,11 +41,10 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Azrix_v2-apk
-          path: out/Azrix_v2.apk
+          path: Azrix_v3/out/Azrix_v2.apk
           if-no-files-found: error
 
       - name: Publish as a release
-        if: github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
